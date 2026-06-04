@@ -1,0 +1,100 @@
+/**
+ * Leseo — minimal custom styles (Bootstrap handles the rest).
+ */
+
+/* Toast container — fixed top-right */
+.leseo-toast-container {
+	position: fixed;
+	top: 45px;
+	right: 16px;
+	z-index: 9999;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	pointer-events: none;
+}
+
+/* Toast */
+.leseo-toast {
+	pointer-events: auto;
+	min-width: 280px;
+	max-width: 400px;
+	padding: 12px 16px;
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 500;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	animation: leseo-toast-slide-in 0.3s ease;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.leseo-toast-success {
+	background: #ecfdf5;
+	color: #065f46;
+	border: 1px solid #a7f3d0;
+}
+
+.leseo-toast-error {
+	background: #fef2f2;
+	color: #991b1b;
+	border: 1px solid #fecaca;
+}
+
+.leseo-toast-exit {
+	animation: leseo-toast-slide-out 0.3s ease forwards;
+}
+
+@keyframes leseo-toast-slide-in {
+	from { opacity: 0; transform: translateX(100%); }
+	to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes leseo-toast-slide-out {
+	from { opacity: 1; transform: translateX(0); }
+	to   { opacity: 0; transform: translateX(100%); }
+}
+
+/* Diff view */
+.leseo-diff-removed {
+	background: #f8d7da;
+	color: #842029;
+	text-decoration: line-through;
+	padding: 1px 2px;
+	border-radius: 2px;
+}
+.leseo-diff-added {
+	background: #d1e7dd;
+	color: #0f5132;
+	padding: 1px 2px;
+	border-radius: 2px;
+}
+
+/* Generated content preview */
+.leseo-generated-content {
+	max-height: 500px;
+	overflow-y: auto;
+}
+.leseo-generated-content h2 { font-size: 1.25rem; margin: 1.5rem 0 0.75rem; }
+.leseo-generated-content h3 { font-size: 1.1rem; margin: 1.25rem 0 0.5rem; }
+.leseo-generated-content p  { margin: 0 0 0.75rem; }
+.leseo-generated-content ul,
+.leseo-generated-content ol { margin: 0 0 0.75rem; padding-left: 1.5rem; }
+
+/* Coming soon pages */
+.leseo-coming-soon {
+	position: relative;
+	min-height: 60vh;
+}
+
+.leseo-coming-soon-overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.85);
+	backdrop-filter: blur(2px);
+	z-index: 10;
+}
