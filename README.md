@@ -1,4 +1,4 @@
-# LeSEO - AI Content Refresh for WordPress
+# LeSEO - AI Content Refresher Plugin for WordPress
 
 WordPress plugin that uses AI to refresh old blog posts. No new backlinks. No spam. No penalty risk.
 
