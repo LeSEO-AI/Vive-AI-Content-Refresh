@@ -53,6 +53,8 @@ function vive_fetch_usage() {
 		'limit'       => intval( $data['limit'] ?? 5 ),
 		'remaining'   => intval( $data['remaining'] ?? 5 ),
 		'cycle_start' => $data['cycle_start'] ?? null,
+		'plan'        => $data['plan'] ?? 'free',
+		'renews_at'   => $data['renews_at'] ?? null,
 	);
 
 	set_transient( 'vive_usage_cache', $cache, 60 );
@@ -95,9 +97,22 @@ function vive_monthly_limit() {
  * Get current plan from D1 or fallback.
  */
 function vive_get_plan() {
-	$limit = vive_monthly_limit();
-	if ( $limit === null ) return 'unknown';
-	return $limit > 100 ? 'premium' : 'free';
+	$usage = vive_fetch_usage();
+	if ( ! $usage ) return 'unknown';
+	return $usage['plan'] ?? 'free';
+}
+
+/**
+ * Get subscription renewal date (premium only).
+ * Returns formatted date string or null.
+ */
+function vive_get_renewal_date() {
+	$usage = vive_fetch_usage();
+	if ( ! $usage || empty( $usage['renews_at'] ) ) {
+		return null;
+	}
+	$date = new DateTime( $usage['renews_at'] );
+	return $date->format( 'M j, Y' );
 }
 
 /**

@@ -16,7 +16,8 @@ function vive_dashboard_page() {
 	$is_premium   = $plan === 'premium';
 	$total        = wp_count_posts()->publish;
 	$refreshed    = get_option( 'vive_refreshed_count', 0 );
-	$cycle_days   = vive_cycle_days_left();
+	$cycle_days   = $is_premium ? null : vive_cycle_days_left();
+	$renewal_date = vive_get_renewal_date();
 	?>
 	<div class="container-fluid p-4">
 
@@ -121,7 +122,13 @@ function vive_dashboard_page() {
 						<div class="progress-bar <?php echo esc_attr( $usage_pct > 80 ? 'bg-warning' : '' ); ?>" style="width:<?php echo esc_attr( $usage_pct ); ?>%"></div>
 					</div>
 					<div class="small text-body-secondary mb-3">
-						<?php if ( $cycle_days !== null ) : ?>
+						<?php if ( $is_premium ) : ?>
+							<?php if ( $renewal_date ) : ?>
+								<i class="bi bi-clock"></i> Renews <?php echo esc_html( $renewal_date ); ?>
+							<?php else : ?>
+								<i class="bi bi-infinity"></i> Unlimited cycle
+							<?php endif; ?>
+						<?php elseif ( $cycle_days !== null ) : ?>
 							<i class="bi bi-clock"></i> Resets in <?php echo esc_html( $cycle_days ); ?> day<?php echo $cycle_days !== 1 ? 's' : ''; ?>
 						<?php else : ?>
 							<i class="bi bi-clock"></i> 3-week cycle &mdash; starts on first use
