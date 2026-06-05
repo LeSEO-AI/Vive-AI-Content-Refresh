@@ -4,7 +4,7 @@
 
 set -e
 
-DEST="/opt/lampp/htdocs/wp-content/plugins/leseo-ai"
+DEST="/opt/lampp/htdocs/wp-content/plugins/vive-ai"
 SRC="$(dirname "$0")"
 
 echo "Syncing files..."

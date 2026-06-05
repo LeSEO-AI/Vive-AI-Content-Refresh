@@ -7,22 +7,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function leseo_dashboard_page() {
-	$plan       = leseo_get_plan();
-	$remaining  = leseo_remaining_posts();
-	$limit      = max( 1, leseo_monthly_limit() );
+function vive_dashboard_page() {
+	$plan       = vive_get_plan();
+	$remaining  = vive_remaining_posts();
+	$limit      = max( 1, vive_monthly_limit() );
 	$used       = $remaining !== null ? max( 0, $limit - $remaining ) : 0;
 	$usage_pct  = $limit > 0 ? min( 100, ( $used / $limit ) * 100 ) : 0;
 	$is_premium   = $plan === 'premium';
 	$total        = wp_count_posts()->publish;
-	$refreshed    = get_option( 'leseo_refreshed_count', 0 );
-	$cycle_days   = leseo_cycle_days_left();
+	$refreshed    = get_option( 'vive_refreshed_count', 0 );
+	$cycle_days   = vive_cycle_days_left();
 	?>
 	<div class="container-fluid p-4">
 
 		<!-- Welcome -->
 		<div class="border rounded-3 p-4 mb-3 bg-light bg-gradient">
-			<h1 class="h3 mb-1"><?php esc_html_e( 'Welcome back', 'leseo-ai' ); ?></h1>
+			<h1 class="h3 mb-1"><?php esc_html_e( 'Welcome back', 'vive-ai' ); ?></h1>
 			<p class="text-body-secondary mb-0">
 				<?php echo esc_html( $total ); ?> published posts &middot;
 				<?php echo esc_html( $refreshed ); ?> refreshed this month
@@ -47,7 +47,7 @@ function leseo_dashboard_page() {
 		<!-- Disclaimer -->
 		<div class="alert alert-info py-2 px-3 mb-4" role="alert">
 			<i class="bi bi-info-circle me-1"></i>
-			Set your writing rules in <a href="?page=leseo-ai-settings" class="alert-link">Settings &amp; Persona</a> first.
+			Set your writing rules in <a href="?page=vive-ai-settings" class="alert-link">Settings &amp; Persona</a> first.
 			AI content is for reference. For best results, review and edit before publishing.
 		</div>
 
@@ -58,13 +58,13 @@ function leseo_dashboard_page() {
 				<h5 class="mb-3">Quick Actions</h5>
 				<div class="row g-3">
 					<div class="col-sm-6">
-						<a href="?page=leseo-ai-create" class="btn btn-outline-secondary w-100 text-start p-3 border-2 d-flex align-items-center gap-3">
+						<a href="?page=vive-ai-create" class="btn btn-outline-secondary w-100 text-start p-3 border-2 d-flex align-items-center gap-3">
 							<i class="bi bi-pencil-square fs-4"></i>
 							<span class="fw-medium">Create Post</span>
 						</a>
 					</div>
 					<div class="col-sm-6">
-						<a href="?page=leseo-ai-revive" class="btn btn-outline-secondary w-100 text-start p-3 border-2 d-flex align-items-center gap-3">
+						<a href="?page=vive-ai-revive" class="btn btn-outline-secondary w-100 text-start p-3 border-2 d-flex align-items-center gap-3">
 							<i class="bi bi-arrow-repeat fs-4"></i>
 							<span class="fw-medium">Revive Post</span>
 						</a>
@@ -128,7 +128,7 @@ function leseo_dashboard_page() {
 						<?php endif; ?>
 					</div>
 					<?php if ( ! $is_premium ) : ?>
-						<a href="https://leseo.app" target="_blank" rel="noopener" class="btn btn-primary btn-sm w-100"><?php esc_html_e( 'Upgrade', 'leseo-ai' ); ?> &mdash; $20/mo</a>
+						<a href="https://leseo.app" target="_blank" rel="noopener" class="btn btn-primary btn-sm w-100"><?php esc_html_e( 'Upgrade', 'vive-ai' ); ?> &mdash; $20/mo</a>
 					<?php endif; ?>
 				</div>
 			</div>
@@ -181,7 +181,7 @@ function leseo_dashboard_page() {
 							<td><span class="badge <?php echo esc_attr( $badge_class ); ?>" title="Published <?php echo esc_attr( $months ); ?> months ago"><?php echo esc_html( $label ); ?></span></td>
 							<td class="text-body-secondary small"><?php echo get_the_date( 'M j, Y', $post ); ?></td>
 							<td class="text-end">
-								<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'leseo-ai-revive', 'post_id' => $post->ID ), admin_url( 'admin.php' ) ) ); ?>" class="btn btn-outline-secondary btn-sm">Revive</a>
+								<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'vive-ai-revive', 'post_id' => $post->ID ), admin_url( 'admin.php' ) ) ); ?>" class="btn btn-outline-secondary btn-sm">Revive</a>
 							</td>
 						</tr>
 					<?php endforeach; ?>

@@ -7,14 +7,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function leseo_revive_page() {
+function vive_revive_page() {
 	$selected_id = isset( $_GET['post_id'] ) ? intval( $_GET['post_id'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	$selected    = $selected_id ? get_post( $selected_id ) : null;
 	?>
 	<div class="container-fluid p-4">
 
 		<!-- Back -->
-		<a href="?page=leseo-ai" class="btn btn-sm btn-outline-secondary px-3 mb-3">&larr; Back to Dashboard</a>
+		<a href="?page=vive-ai" class="btn btn-sm btn-outline-secondary px-3 mb-3">&larr; Back to Dashboard</a>
 
 		<h1 class="h3 mb-3">Revive a Post</h1>
 
@@ -37,7 +37,7 @@ function leseo_revive_page() {
 		<div class="d-inline-block mb-4">
 			<div class="alert alert-info py-2 px-3 mb-0" role="alert">
 				<i class="bi bi-info-circle me-1"></i>
-				Set your writing rules in <a href="?page=leseo-ai-settings" class="alert-link">Settings &amp; Persona</a> first.
+				Set your writing rules in <a href="?page=vive-ai-settings" class="alert-link">Settings &amp; Persona</a> first.
 				AI content is for reference. For best results, review and edit before publishing.
 			</div>
 		</div>
@@ -53,15 +53,15 @@ function leseo_revive_page() {
 
 		<?php if ( $selected ) : ?>
 
-		<form id="leseo-revive-form">
+		<form id="vive-revive-form">
 			<input type="hidden" name="original_content" value="<?php echo esc_attr( $selected->post_content ); ?>" />
 
 			<!-- Selector + Options row -->
 			<div class="row g-3 mb-3">
 				<div class="col-md-5">
-					<label for="leseo-post-select" class="form-label fw-medium">Select a post to refresh</label>
-					<select id="leseo-post-select" class="form-select"
-							onchange="window.location='?page=leseo-ai-revive&post_id='+this.value">
+					<label for="vive-post-select" class="form-label fw-medium">Select a post to refresh</label>
+					<select id="vive-post-select" class="form-select"
+							onchange="window.location='?page=vive-ai-revive&post_id='+this.value">
 						<option value="">— Select a post —</option>
 						<?php
 						$posts = get_posts( array( 'numberposts' => 20, 'post_status' => 'publish', 'orderby' => 'date', 'order' => 'DESC' ) );
@@ -75,18 +75,18 @@ function leseo_revive_page() {
 				<div class="col-md-7">
 					<div class="row g-2">
 						<div class="col-md-4">
-							<label for="leseo-revive-topic" class="form-label small fw-medium">Topic focus</label>
-							<input type="text" id="leseo-revive-topic" name="topic" class="form-control"
+							<label for="vive-revive-topic" class="form-label small fw-medium">Topic focus</label>
+							<input type="text" id="vive-revive-topic" name="topic" class="form-control"
 								   placeholder="e.g. <?php echo esc_attr( $selected->post_title ); ?>" />
 						</div>
 						<div class="col-md-4">
-							<label for="leseo-revive-keywords" class="form-label small fw-medium">Keywords</label>
-							<input type="text" id="leseo-revive-keywords" name="keywords" class="form-control"
+							<label for="vive-revive-keywords" class="form-label small fw-medium">Keywords</label>
+							<input type="text" id="vive-revive-keywords" name="keywords" class="form-control"
 								   placeholder="target keywords" />
 						</div>
 						<div class="col-md-4">
-							<label for="leseo-revive-tone" class="form-label small fw-medium">Tone</label>
-							<select id="leseo-revive-tone" name="tone" class="form-select">
+							<label for="vive-revive-tone" class="form-label small fw-medium">Tone</label>
+							<select id="vive-revive-tone" name="tone" class="form-select">
 								<option value="professional">Professional</option>
 								<option value="casual">Casual</option>
 								<option value="technical">Technical</option>
@@ -99,7 +99,7 @@ function leseo_revive_page() {
 
 			<!-- Buttons -->
 			<div class="d-flex gap-2 mb-3 justify-content-end">
-				<a href="?page=leseo-ai-settings" class="btn btn-outline-secondary">Settings &amp; Persona</a>
+				<a href="?page=vive-ai-settings" class="btn btn-outline-secondary">Settings &amp; Persona</a>
 				<button type="submit" class="btn btn-primary">Analyze &amp; Revive</button>
 			</div>
 
@@ -114,7 +114,7 @@ function leseo_revive_page() {
 				<div class="col-lg-6">
 					<h5 class="mb-2">Refreshed Content</h5>
 					<div class="border rounded-3 bg-light d-flex flex-column" style="height:450px;">
-						<div id="leseo-revive-output" class="flex-grow-1 p-3" style="overflow-y:auto;">
+						<div id="vive-revive-output" class="flex-grow-1 p-3" style="overflow-y:auto;">
 							<div class="text-center text-body-secondary py-5">
 								<i class="bi bi-arrow-repeat fs-1 d-block mb-3"></i>
 								<p class="mb-0">Click <strong>Analyze &amp; Revive</strong> to generate refreshed content.<br>
@@ -122,10 +122,10 @@ function leseo_revive_page() {
 							</div>
 						</div>
 						<div class="p-3 border-top bg-light d-flex justify-content-between align-items-center">
-							<button type="button" id="leseo-revive-toggle-diff" class="btn btn-sm btn-outline-secondary" disabled>View Diff</button>
+							<button type="button" id="vive-revive-toggle-diff" class="btn btn-sm btn-outline-secondary" disabled>View Diff</button>
 							<div class="d-flex gap-2">
-								<button type="button" id="leseo-revive-save-draft" class="btn btn-outline-secondary" disabled>Save Draft</button>
-								<button type="button" id="leseo-revive-publish" class="btn btn-primary" disabled>Publish</button>
+								<button type="button" id="vive-revive-save-draft" class="btn btn-outline-secondary" disabled>Save Draft</button>
+								<button type="button" id="vive-revive-publish" class="btn btn-primary" disabled>Publish</button>
 							</div>
 						</div>
 					</div>
@@ -137,9 +137,9 @@ function leseo_revive_page() {
 
 		<!-- Post selector (no post selected) -->
 		<div class="mb-4" style="max-width:400px;">
-			<label for="leseo-post-select" class="form-label fw-medium">Select a post to refresh</label>
-			<select id="leseo-post-select" class="form-select form-select-lg"
-					onchange="window.location='?page=leseo-ai-revive&post_id='+this.value">
+			<label for="vive-post-select" class="form-label fw-medium">Select a post to refresh</label>
+			<select id="vive-post-select" class="form-select form-select-lg"
+					onchange="window.location='?page=vive-ai-revive&post_id='+this.value">
 				<option value="">— Select a post —</option>
 				<?php
 				$posts = get_posts( array( 'numberposts' => 20, 'post_status' => 'publish', 'orderby' => 'date', 'order' => 'DESC' ) );

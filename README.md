@@ -1,4 +1,4 @@
-# LeSEO - AI Content Refresher Plugin for WordPress
+# LeSEO.app | Vive - AI Content Reviver Plugin for WordPress
 
 WordPress plugin that uses AI to refresh old blog posts. No new backlinks. No spam. No penalty risk.
 
@@ -7,7 +7,7 @@ WordPress plugin that uses AI to refresh old blog posts. No new backlinks. No sp
 1. Download the [latest release](https://github.com/LeSEO-AI/LeSEO-Plugin/releases/latest)
 2. Upload the `leseo-ai` folder to `/wp-content/plugins/`
 3. Activate the plugin in WordPress admin
-4. Go to **LeSEO > Settings** and enter your API key
+4. Go to **VIVE > Settings** and enter your API key
 
 ## Features
 

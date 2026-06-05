@@ -1,4 +1,4 @@
-=== LeSEO - AI Content Refresh ===
+=== Vive - AI Content Refresh ===
 Contributors: dav1lex
 Donate link: https://leseo.app
 Tags: seo, content refresh, ai writing, blog posts, content update
@@ -13,7 +13,7 @@ AI-powered content refresh. Keep old posts ranking by updating them in your own 
 
 == Description ==
 
-Most site owners post new content and forget about old posts. But old posts already have backlinks, authority, and Google trust. Leseo analyzes your existing writing style, then uses AI to improve your old content while keeping your voice intact.
+Most site owners post new content and forget about old posts. But old posts already have backlinks, authority, and Google trust. Vive analyzes your existing writing style, then uses AI to improve your old content while keeping your voice intact.
 
 = How It Works =
 
@@ -46,9 +46,9 @@ For best results, set your writing rules in Settings and review the post before 
 
 == Installation ==
 
-1. Upload the `leseo` folder to `/wp-content/plugins/` or install via the WordPress plugin directory.
+1. Upload the `vive-ai` folder to `/wp-content/plugins/` or install via the WordPress plugin directory.
 2. Activate the plugin through the Plugins menu in WordPress admin.
-3. Go to **Leseo > Settings** and enter your API key.
+3. Go to **Vive > Settings** and enter your API key.
 4. Click **Analyze from Posts** to auto-discover your writing persona.
 5. Start reviving old posts or creating new ones.
 
@@ -56,7 +56,7 @@ For best results, set your writing rules in Settings and review the post before 
 
 = Do I need an API key? =
 
-Yes. Leseo connects to a cloud AI service. Get your free API key at [leseo.app](https://leseo.app).
+Yes. Vive connects to a cloud AI service. Get your free API key at [leseo.app](https://leseo.app).
 
 = Does it publish automatically? =
 
@@ -68,7 +68,7 @@ English, German, Polish, French, Spanish, Italian, Portuguese, Dutch, Russian, J
 
 = Is my content sent to third parties? =
 
-Content is sent to the Leseo AI service for processing. It is not stored, shared, or used for training. See our privacy policy for details.
+Content is sent to the Vive AI service for processing. It is not stored, shared, or used for training. See our privacy policy for details.
 
 = Can I customize the writing style? =
 
@@ -84,3 +84,15 @@ Yes. Go to Settings and define your persona and writing rules. You can also auto
 * Diff view for comparing changes
 * Multi-language support
 * Usage tracking and limits
+
+== External Services ==
+
+This plugin connects to the LeSEO.app AI worker service to generate
+and refresh post content using AI.
+
+Data sent: post content, API key. Sent when user triggers a content
+refresh or on connection/usage checks.
+
+Service provider: LeSEO.app
+Terms of Service: https://leseo.app/terms
+Privacy Policy: https://leseo.app/privacy

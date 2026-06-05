@@ -1,9 +1,9 @@
 /**
- * Leseo — minimal custom styles (Bootstrap handles the rest).
+ * Vive — minimal custom styles (Bootstrap handles the rest).
  */
 
 /* Toast container — fixed top-right */
-.leseo-toast-container {
+.vive-toast-container {
 	position: fixed;
 	top: 45px;
 	right: 16px;
@@ -15,7 +15,7 @@
 }
 
 /* Toast */
-.leseo-toast {
+.vive-toast {
 	pointer-events: auto;
 	min-width: 280px;
 	max-width: 400px;
@@ -24,47 +24,47 @@
 	font-size: 14px;
 	font-weight: 500;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-	animation: leseo-toast-slide-in 0.3s ease;
+	animation: vive-toast-slide-in 0.3s ease;
 	display: flex;
 	align-items: center;
 	gap: 8px;
 }
 
-.leseo-toast-success {
+.vive-toast-success {
 	background: #ecfdf5;
 	color: #065f46;
 	border: 1px solid #a7f3d0;
 }
 
-.leseo-toast-error {
+.vive-toast-error {
 	background: #fef2f2;
 	color: #991b1b;
 	border: 1px solid #fecaca;
 }
 
-.leseo-toast-exit {
-	animation: leseo-toast-slide-out 0.3s ease forwards;
+.vive-toast-exit {
+	animation: vive-toast-slide-out 0.3s ease forwards;
 }
 
-@keyframes leseo-toast-slide-in {
+@keyframes vive-toast-slide-in {
 	from { opacity: 0; transform: translateX(100%); }
 	to   { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes leseo-toast-slide-out {
+@keyframes vive-toast-slide-out {
 	from { opacity: 1; transform: translateX(0); }
 	to   { opacity: 0; transform: translateX(100%); }
 }
 
 /* Diff view */
-.leseo-diff-removed {
+.vive-diff-removed {
 	background: #f8d7da;
 	color: #842029;
 	text-decoration: line-through;
 	padding: 1px 2px;
 	border-radius: 2px;
 }
-.leseo-diff-added {
+.vive-diff-added {
 	background: #d1e7dd;
 	color: #0f5132;
 	padding: 1px 2px;
@@ -72,23 +72,23 @@
 }
 
 /* Generated content preview */
-.leseo-generated-content {
+.vive-generated-content {
 	max-height: 500px;
 	overflow-y: auto;
 }
-.leseo-generated-content h2 { font-size: 1.25rem; margin: 1.5rem 0 0.75rem; }
-.leseo-generated-content h3 { font-size: 1.1rem; margin: 1.25rem 0 0.5rem; }
-.leseo-generated-content p  { margin: 0 0 0.75rem; }
-.leseo-generated-content ul,
-.leseo-generated-content ol { margin: 0 0 0.75rem; padding-left: 1.5rem; }
+.vive-generated-content h2 { font-size: 1.25rem; margin: 1.5rem 0 0.75rem; }
+.vive-generated-content h3 { font-size: 1.1rem; margin: 1.25rem 0 0.5rem; }
+.vive-generated-content p  { margin: 0 0 0.75rem; }
+.vive-generated-content ul,
+.vive-generated-content ol { margin: 0 0 0.75rem; padding-left: 1.5rem; }
 
 /* Coming soon pages */
-.leseo-coming-soon {
+.vive-coming-soon {
 	position: relative;
 	min-height: 60vh;
 }
 
-.leseo-coming-soon-overlay {
+.vive-coming-soon-overlay {
 	position: absolute;
 	inset: 0;
 	display: flex;

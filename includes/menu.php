@@ -7,93 +7,93 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function leseo_register_menu() {
+function vive_register_menu() {
 	add_menu_page(
-		'LeSEO',
-		'LeSEO',
+		'Vive',
+		'Vive',
 		'manage_options',
-		'leseo-ai',
-		'leseo_dashboard_page',
+		'vive-ai',
+		'vive_dashboard_page',
 		'dashicons-update',
 		99
 	);
 
 	// Dashboard
 	add_submenu_page(
-		'leseo-ai',
+		'vive-ai',
 		'Dashboard',
 		'Dashboard',
 		'manage_options',
-		'leseo-ai',
-		'leseo_dashboard_page'
+		'vive-ai',
+		'vive_dashboard_page'
 	);
 
 	// MVP pages
 	add_submenu_page(
-		'leseo-ai',
+		'vive-ai',
 		'Create Post',
 		'Create Post',
 		'manage_options',
-		'leseo-ai-create',
-		'leseo_create_page'
+		'vive-ai-create',
+		'vive_create_page'
 	);
 
 	add_submenu_page(
-		'leseo-ai',
+		'vive-ai',
 		'Revive Post',
 		'Revive Post',
 		'manage_options',
-		'leseo-ai-revive',
-		'leseo_revive_page'
+		'vive-ai-revive',
+		'vive_revive_page'
 	);
 
 
 	// Settings
 	add_submenu_page(
-		'leseo-ai',
+		'vive-ai',
 		'Settings',
 		'Settings',
 		'manage_options',
-		'leseo-ai-settings',
-		'leseo_settings_page'
+		'vive-ai-settings',
+		'vive_settings_page'
 	);
 	
 	// Coming soon
 	add_submenu_page(
-		'leseo-ai',
+		'vive-ai',
 		'Bulk Generation',
 		'Bulk Gen <span class="update-plugins" style="background:#6c757d;font-size:9px;padding:1px 5px;border-radius:9px;margin-left:4px;vertical-align:middle;">Soon</span>',
 		'manage_options',
-		'leseo-ai-bulk',
-		'leseo_bulk_page'
+		'vive-ai-bulk',
+		'vive_bulk_page'
 	);
 
 	add_submenu_page(
-		'leseo-ai',
+		'vive-ai',
 		'Competitor Analysis',
 		'Competitors <span class="update-plugins" style="background:#6c757d;font-size:9px;padding:1px 5px;border-radius:9px;margin-left:4px;vertical-align:middle;">Soon</span>',
 		'manage_options',
-		'leseo-ai-competitor',
-		'leseo_competitor_page'
+		'vive-ai-competitor',
+		'vive_competitor_page'
 	);
 
 	add_submenu_page(
-		'leseo-ai',
+		'vive-ai',
 		'Content Calendar',
 		'Calendar <span class="update-plugins" style="background:#6c757d;font-size:9px;padding:1px 5px;border-radius:9px;margin-left:4px;vertical-align:middle;">Soon</span>',
 		'manage_options',
-		'leseo-ai-calendar',
-		'leseo_calendar_page'
+		'vive-ai-calendar',
+		'vive_calendar_page'
 	);
 
 	add_submenu_page(
-		'leseo-ai',
+		'vive-ai',
 		'Analytics',
 		'Analytics <span class="update-plugins" style="background:#6c757d;font-size:9px;padding:1px 5px;border-radius:9px;margin-left:4px;vertical-align:middle;">Soon</span>',
 		'manage_options',
-		'leseo-ai-analytics',
-		'leseo_analytics_page'
+		'vive-ai-analytics',
+		'vive_analytics_page'
 	);
 
 }
-add_action( 'admin_menu', 'leseo_register_menu' );
+add_action( 'admin_menu', 'vive_register_menu' );

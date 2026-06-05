@@ -1,10 +1,10 @@
 /**
- * Leseo — Shared JS for Create & Revive pages.
+ * Vive — Shared JS for Create & Revive pages.
  */
 ( function() {
 	'use strict';
 
-	const api = window.leseoApi || {};
+	const api = window.viveApi || {};
 
 	/**
 	 * Generic Worker call via PHP REST endpoint.
@@ -44,7 +44,7 @@
 	 * Render result into output container.
 	 */
 	function renderResult( container, html ) {
-		container.innerHTML = '<div class="leseo-generated-content">' + html + '</div>';
+		container.innerHTML = '<div class="vive-generated-content">' + html + '</div>';
 	}
 
 	/**
@@ -68,21 +68,21 @@
 		type = type || 'success';
 
 		// Get or create container
-		let container = document.querySelector( '.leseo-toast-container' );
+		let container = document.querySelector( '.vive-toast-container' );
 		if ( ! container ) {
 			container = document.createElement( 'div' );
-			container.className = 'leseo-toast-container';
+			container.className = 'vive-toast-container';
 			document.body.appendChild( container );
 		}
 
 		const toast = document.createElement( 'div' );
-		toast.className = 'leseo-toast leseo-toast-' + type;
+		toast.className = 'vive-toast vive-toast-' + type;
 		toast.textContent = msg;
 
 		container.appendChild( toast );
 
 		setTimeout( function() {
-			toast.classList.add( 'leseo-toast-exit' );
+			toast.classList.add( 'vive-toast-exit' );
 			setTimeout( function() { toast.remove(); }, 300 );
 		}, 4000 );
 	}
@@ -94,11 +94,11 @@
 	 * Wire up Create Post page.
 	 */
 	function initCreatePage() {
-		const form = document.getElementById( 'leseo-create-form' );
+		const form = document.getElementById( 'vive-create-form' );
 		if ( ! form ) return;
 
 		const btn    = form.querySelector( 'button[type="submit"]' );
-		const output = document.getElementById( 'leseo-create-output' );
+		const output = document.getElementById( 'vive-create-output' );
 
 		form.addEventListener( 'submit', async function( e ) {
 			e.preventDefault();
@@ -145,15 +145,15 @@
 	 */
 	function renderDiff( container, oldText, newText, fullHtml ) {
 		const diff = Diff.diffWords( oldText, newText );
-		let diffHtml = '<div class="leseo-diff-view">';
+		let diffHtml = '<div class="vive-diff-view">';
 
 		diff.forEach( function( part ) {
 			if ( part.removed ) {
-				diffHtml += '<span class="leseo-diff-removed">' + escHtml( part.value ) + '</span>';
+				diffHtml += '<span class="vive-diff-removed">' + escHtml( part.value ) + '</span>';
 			} else if ( part.added ) {
-				diffHtml += '<span class="leseo-diff-added">' + escHtml( part.value ) + '</span>';
+				diffHtml += '<span class="vive-diff-added">' + escHtml( part.value ) + '</span>';
 			} else {
-				diffHtml += '<span class="leseo-diff-same">' + escHtml( part.value ) + '</span>';
+				diffHtml += '<span class="vive-diff-same">' + escHtml( part.value ) + '</span>';
 			}
 		} );
 
@@ -172,11 +172,11 @@
 	 * Wire up Revive Post page.
 	 */
 	function initRevivePage() {
-		const form = document.getElementById( 'leseo-revive-form' );
+		const form = document.getElementById( 'vive-revive-form' );
 		if ( ! form ) return;
 
 		const btn    = form.querySelector( 'button[type="submit"]' );
-		const output = document.getElementById( 'leseo-revive-output' );
+		const output = document.getElementById( 'vive-revive-output' );
 
 		form.addEventListener( 'submit', async function( e ) {
 			e.preventDefault();
@@ -288,9 +288,9 @@
 		postId = postId || 0;
 
 		// Check for footer buttons (Revive page layout)
-		const footerPubBtn = document.getElementById( 'leseo-revive-publish' );
-		const footerDraftBtn = document.getElementById( 'leseo-revive-save-draft' );
-		const toggleBtn = document.getElementById( 'leseo-revive-toggle-diff' );
+		const footerPubBtn = document.getElementById( 'vive-revive-publish' );
+		const footerDraftBtn = document.getElementById( 'vive-revive-save-draft' );
+		const toggleBtn = document.getElementById( 'vive-revive-toggle-diff' );
 
 		if ( footerPubBtn && footerDraftBtn ) {
 			// Enable footer buttons and bind events

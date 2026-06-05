@@ -1,23 +1,23 @@
 <?php
 /**
- * API utility for Leseo Worker communication.
+ * API utility for Vive Worker communication.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function leseo_get_api_key() {
-    return get_option('leseo_api_key', '');
+function vive_get_api_key() {
+    return get_option('vive_api_key', '');
 }
 
-function leseo_get_worker_url() {
-	return defined( 'LESEO_WORKER_URL' ) ? rtrim( LESEO_WORKER_URL, '/' ) : '';
+function vive_get_worker_url() {
+	return defined( 'VIVE_WORKER_URL' ) ? rtrim( VIVE_WORKER_URL, '/' ) : '';
 }
 
-function leseo_call_worker($endpoint, $body) {
-    $url = leseo_get_worker_url() . $endpoint;
-    $key = leseo_get_api_key();
+function vive_call_worker($endpoint, $body) {
+    $url = vive_get_worker_url() . $endpoint;
+    $key = vive_get_api_key();
 
     $response = wp_remote_post($url, array(
         'headers' => array(
@@ -46,15 +46,15 @@ function leseo_call_worker($endpoint, $body) {
 /**
  * Analyze posts → build voice persona.
  */
-function leseo_analyze_posts($posts) {
-    return leseo_call_worker('/analyze', array('posts' => $posts));
+function vive_analyze_posts($posts) {
+    return vive_call_worker('/analyze', array('posts' => $posts));
 }
 
 /**
  * Create new post from scratch.
  */
-function leseo_create($persona, $topic, $keywords = '', $tone = '', $rules = '', $language = '') {
-    return leseo_call_worker('/create', array(
+function vive_create($persona, $topic, $keywords = '', $tone = '', $rules = '', $language = '') {
+    return vive_call_worker('/create', array(
         'persona'  => $persona,
         'topic'    => $topic,
         'keywords' => $keywords,
@@ -67,8 +67,8 @@ function leseo_create($persona, $topic, $keywords = '', $tone = '', $rules = '',
 /**
  * Revive existing post.
  */
-function leseo_revive($persona, $topic, $original_content, $keywords = '', $tone = '', $rules = '', $language = '') {
-    return leseo_call_worker('/revive', array(
+function vive_revive($persona, $topic, $original_content, $keywords = '', $tone = '', $rules = '', $language = '') {
+    return vive_call_worker('/revive', array(
         'persona'        => $persona,
         'topic'          => $topic,
         'originalContent'=> $original_content,
@@ -82,9 +82,9 @@ function leseo_revive($persona, $topic, $original_content, $keywords = '', $tone
 /**
  * Test connection to Worker.
  */
-function leseo_test_connection() {
-    $url = leseo_get_worker_url() . '/health';
-    $key = leseo_get_api_key();
+function vive_test_connection() {
+    $url = vive_get_worker_url() . '/health';
+    $key = vive_get_api_key();
 
     $response = wp_remote_get($url, array(
         'headers' => array('X-API-Key' => $key),

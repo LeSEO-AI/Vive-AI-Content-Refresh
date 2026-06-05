@@ -7,24 +7,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function leseo_settings_page() {
+function vive_settings_page() {
 	$message      = '';
 	$message_type = 'success';
 
 	// --- Handle API Key Save ---
-	if ( isset( $_POST['leseo_save_api'] ) ) {
-		check_admin_referer( 'leseo_api' );
-		$api_key = sanitize_text_field( wp_unslash( $_POST['leseo_api_key'] ?? '' ) );
-		update_option( 'leseo_api_key', $api_key );
-		leseo_bust_usage_cache();
+	if ( isset( $_POST['vive_save_api'] ) ) {
+		check_admin_referer( 'vive_api' );
+		$api_key = sanitize_text_field( wp_unslash( $_POST['vive_api_key'] ?? '' ) );
+		update_option( 'vive_api_key', $api_key );
+		vive_bust_usage_cache();
 
 		// Validate the key
 		if ( empty( $api_key ) ) {
-			delete_option( 'leseo_api_key_status' );
+			delete_option( 'vive_api_key_status' );
 			$message = 'API key cleared.';
 		} else {
-			$status = leseo_validate_api_key( $api_key );
-			update_option( 'leseo_api_key_status', $status );
+			$status = vive_validate_api_key( $api_key );
+			update_option( 'vive_api_key_status', $status );
 			if ( $status === 'valid' ) {
 				$message = 'API key saved and verified.';
 			} elseif ( $status === 'invalid' ) {
@@ -38,28 +38,28 @@ function leseo_settings_page() {
 	}
 
 	// --- Handle Persona & Rules Save ---
-	if ( isset( $_POST['leseo_save_persona_rules'] ) ) {
-		check_admin_referer( 'leseo_persona_rules' );
-		$persona  = sanitize_textarea_field( wp_unslash( $_POST['leseo_persona'] ?? '' ) );
-		$rules    = sanitize_textarea_field( wp_unslash( $_POST['leseo_rules'] ?? '' ) );
-		$language = sanitize_text_field( wp_unslash( $_POST['leseo_language'] ?? '' ) );
-		update_option( 'leseo_persona', $persona );
-		update_option( 'leseo_rules', $rules );
-		update_option( 'leseo_language', $language );
+	if ( isset( $_POST['vive_save_persona_rules'] ) ) {
+		check_admin_referer( 'vive_persona_rules' );
+		$persona  = sanitize_textarea_field( wp_unslash( $_POST['vive_persona'] ?? '' ) );
+		$rules    = sanitize_textarea_field( wp_unslash( $_POST['vive_rules'] ?? '' ) );
+		$language = sanitize_text_field( wp_unslash( $_POST['vive_language'] ?? '' ) );
+		update_option( 'vive_persona', $persona );
+		update_option( 'vive_rules', $rules );
+		update_option( 'vive_language', $language );
 		$message = 'Persona &amp; rules saved.';
 	}
 
-	$api_key  = get_option( 'leseo_api_key', '' );
-	$persona  = get_option( 'leseo_persona', '' );
-	$rules    = get_option( 'leseo_rules', '' );
-	$language = get_option( 'leseo_language', 'en' );
-	$plan     = leseo_get_plan();
-	$left     = leseo_remaining_posts();
-	$limit    = max( 1, leseo_monthly_limit() );
+	$api_key  = get_option( 'vive_api_key', '' );
+	$persona  = get_option( 'vive_persona', '' );
+	$rules    = get_option( 'vive_rules', '' );
+	$language = get_option( 'vive_language', 'en' );
+	$plan     = vive_get_plan();
+	$left     = vive_remaining_posts();
+	$limit    = max( 1, vive_monthly_limit() );
 	$used     = $left !== null ? max( 0, $limit - $left ) : 0;
 	$usage_pct  = $limit > 0 ? min( 100, ( $used / $limit ) * 100 ) : 0;
-	$cycle_days = leseo_cycle_days_left();
-	$key_status = leseo_get_api_key_status();
+	$cycle_days = vive_cycle_days_left();
+	$key_status = vive_get_api_key_status();
 
 	$languages = array(
 		'en' => 'English', 'de' => 'German',    'pl' => 'Polish',
@@ -74,13 +74,9 @@ function leseo_settings_page() {
 	<div class="container-fluid p-4">
 
 		<!-- Back -->
-		<a href="?page=leseo-ai" class="btn btn-sm btn-outline-secondary px-3 mb-3">&larr; Back to Dashboard</a>
+		<a href="?page=vive-ai" class="btn btn-sm btn-outline-secondary px-3 mb-3">&larr; Back to Dashboard</a>
 
 		<h1 class="h3 mb-4">Settings</h1>
-
-		<?php if ( $message ) : ?>
-			<script>document.addEventListener('DOMContentLoaded', function() { showToast('<?php echo esc_js( $message ); ?>', '<?php echo esc_js( $message_type ); ?>'); });</script>
-		<?php endif; ?>
 
 		<div class="row g-4 mb-4">
 
@@ -97,16 +93,16 @@ function leseo_settings_page() {
 							<span class="badge text-bg-warning"><i class="bi bi-question-circle me-1"></i>Unverified</span>
 						<?php endif; ?>
 					</div>
-					<form method="post" id="leseo-api-form">
-						<?php wp_nonce_field( 'leseo_api' ); ?>
+					<form method="post" id="vive-api-form">
+						<?php wp_nonce_field( 'vive_api' ); ?>
 						<div class="mb-3">
-							<label for="leseo_api_key" class="form-label">License Key</label>
-							<input type="password" id="leseo_api_key" name="leseo_api_key"
+							<label for="vive_api_key" class="form-label">License Key</label>
+							<input type="password" id="vive_api_key" name="vive_api_key"
 								   value="<?php echo esc_attr( $api_key ); ?>" class="form-control"
 								   placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
 						</div>
 						<div class="d-flex gap-2">
-							<button type="submit" name="leseo_save_api" class="btn btn-primary" disabled>Save</button>
+							<button type="submit" name="vive_save_api" class="btn btn-primary" disabled>Save</button>
 							<a href="https://leseo.app/login" target="_blank" rel="noopener" class="btn btn-outline-secondary">Get API Key</a>
 						</div>
 					</form>
@@ -126,7 +122,7 @@ function leseo_settings_page() {
 						<?php echo esc_html( $plan === 'premium' ? 'Premium' : 'Free' ); ?>
 						</span>
 						<?php if ( $plan !== 'premium' ) : ?>
-							<small class="text-body-secondary"><?php esc_html_e( 'Free for use', 'leseo-ai' ); ?></small>
+							<small class="text-body-secondary"><?php esc_html_e( 'Free for use', 'vive-ai' ); ?></small>
 						<?php endif; ?>
 					</div>
 					<div class="small text-body-secondary mb-1">
@@ -143,7 +139,7 @@ function leseo_settings_page() {
 						<?php endif; ?>
 					</div>
 					<?php if ( $plan === 'free' ) : ?>
-						<a href="https://leseo.app" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm w-100"><?php esc_html_e( 'Upgrade to Premium', 'leseo-ai' ); ?> &mdash; $20/mo</a>
+						<a href="https://leseo.app" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm w-100"><?php esc_html_e( 'Upgrade to Premium', 'vive-ai' ); ?> &mdash; $20/mo</a>
 					<?php endif; ?>
 				</div>
 			</div>
@@ -155,12 +151,12 @@ function leseo_settings_page() {
 			<h5 class="mb-1">Persona &amp; Writing Rules</h5>
 			<p class="text-body-secondary small mb-3">Define the author voice and writing style. Analyze your existing posts to auto-discover both.</p>
 
-			<form method="post" id="leseo-persona-rules-form">
-				<?php wp_nonce_field( 'leseo_persona_rules' ); ?>
+			<form method="post" id="vive-persona-rules-form">
+				<?php wp_nonce_field( 'vive_persona_rules' ); ?>
 
 				<div class="mb-3">
-					<label for="leseo_language" class="form-label">Output Language</label>
-					<select id="leseo_language" name="leseo_language" class="form-select" style="max-width:300px;">
+					<label for="vive_language" class="form-label">Output Language</label>
+					<select id="vive_language" name="vive_language" class="form-select" style="max-width:300px;">
 						<?php foreach ( $languages as $code => $name ) : ?>
 							<option value="<?php echo esc_attr( $code ); ?>" <?php selected( $language, $code ); ?>>
 								<?php echo esc_html( $name ); ?>
@@ -171,94 +167,28 @@ function leseo_settings_page() {
 
 				<div class="row g-3 mb-3">
 					<div class="col-md-6">
-						<label for="leseo_persona" class="form-label">Persona</label>
-						<textarea id="leseo_persona" name="leseo_persona" class="form-control" rows="10"
+						<label for="vive_persona" class="form-label">Persona</label>
+						<textarea id="vive_persona" name="vive_persona" class="form-control" rows="10"
 								  placeholder="e.g. Write like a friendly teacher. Use analogies. Short paragraphs. No jargon."><?php echo esc_textarea( $persona ); ?></textarea>
 					</div>
 					<div class="col-md-6">
-						<label for="leseo_rules" class="form-label">Style Rules</label>
-						<textarea id="leseo_rules" name="leseo_rules" class="form-control" rows="10"
+						<label for="vive_rules" class="form-label">Style Rules</label>
+						<textarea id="vive_rules" name="vive_rules" class="form-control" rows="10"
 								  placeholder="e.g. Use short sentences. No jargon. Always open with a question."><?php echo esc_textarea( $rules ); ?></textarea>
 					</div>
 				</div>
 
 				<div class="d-flex gap-2">
-					<button type="submit" name="leseo_save_persona_rules" class="btn btn-primary" disabled>Save</button>
-					<button type="button" id="leseo-auto-discover" class="btn btn-outline-secondary">Analyze from Posts</button>
+					<button type="submit" name="vive_save_persona_rules" class="btn btn-primary" disabled>Save</button>
+					<button type="button" id="vive-auto-discover" class="btn btn-outline-secondary">Analyze from Posts</button>
 				</div>
 			</form>
 		</div>
 
 	</div>
-
-	<script>
-	(function() {
-		// Dirty tracking: Persona & Rules
-		var form    = document.getElementById('leseo-persona-rules-form');
-		var saveBtn = form.querySelector('button[type="submit"]');
-		var persona = document.getElementById('leseo_persona');
-		var rules   = document.getElementById('leseo_rules');
-		var lang    = document.getElementById('leseo_language');
-
-		var initPersona = persona.value;
-		var initRules   = rules.value;
-		var initLang    = lang.value;
-
-		function checkDirty() {
-			var dirty = persona.value !== initPersona || rules.value !== initRules || lang.value !== initLang;
-			saveBtn.disabled = !dirty;
-		}
-
-		persona.addEventListener('input', checkDirty);
-		rules.addEventListener('input', checkDirty);
-		lang.addEventListener('change', checkDirty);
-
-		// API Key dirty tracking
-		(function() {
-			var apiForm  = document.getElementById('leseo-api-form');
-			var apiSave  = apiForm.querySelector('button[type="submit"]');
-			var apiInput = document.getElementById('leseo_api_key');
-			var initApi  = apiInput.value;
-
-			apiInput.addEventListener('input', function() {
-				apiSave.disabled = (apiInput.value === initApi);
-			});
-		})();
-
-		// Auto-Discover
-		var discoverBtn = document.getElementById('leseo-auto-discover');
-
-		discoverBtn.addEventListener('click', async function() {
-			discoverBtn.disabled = true;
-			discoverBtn.textContent = 'Analyzing…';
-
-			try {
-			var resp = await fetch('<?php echo esc_url_raw( rest_url( 'leseo-ai/v1/auto-discover' ) ); ?>', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'X-WP-Nonce': '<?php echo esc_js( wp_create_nonce( 'wp_rest' ) ); ?>',
-				},
-				});
-
-				var data = await resp.json();
-
-				if (data.error) {
-					showToast(data.error, 'error');
-				} else {
-					persona.value = data.persona || '';
-					rules.value = data.rules || '';
-					checkDirty();
-					showToast('Persona and rules filled from your posts.', 'success');
-				}
-			} catch (err) {
-				showToast('Request failed: ' + err.message, 'error');
-			} finally {
-				discoverBtn.disabled = false;
-				discoverBtn.textContent = 'Analyze from Posts';
-			}
-		});
-	})();
-	</script>
 	<?php
+	// Toast trigger via enqueue system
+	if ( $message ) {
+		wp_add_inline_script( 'vive-app', 'document.addEventListener("DOMContentLoaded",function(){showToast("' . esc_js( $message ) . '","' . esc_js( $message_type ) . '");});' );
+	}
 }
