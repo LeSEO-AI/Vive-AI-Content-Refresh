@@ -151,7 +151,7 @@ function vive_dashboard_page() {
 				<tbody>
 					<?php
 					$posts = get_posts( array(
-						'numberposts' => 10,
+						'numberposts' => 5,
 						'post_status' => 'publish',
 						'orderby'     => 'date',
 						'order'       => 'ASC',
