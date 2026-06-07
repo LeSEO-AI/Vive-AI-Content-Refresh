@@ -1,4 +1,4 @@
-=== Vive - AI Content Refresh ===
+=== Vive - AI Content Reviver ===
 Contributors: dav1lex
 Donate link: https://leseo.app
 Tags: seo, content refresh, ai writing, blog posts, content update

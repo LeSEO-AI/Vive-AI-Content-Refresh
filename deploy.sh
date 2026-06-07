@@ -26,7 +26,7 @@ rsync -av --delete \
 echo "Building vive-ai-${VERSION}.zip..."
 cd "$SRC"
 zip -r "/home/davilex/Desktop/wp-test/vive-ai-${VERSION}.zip" . \
-    -x ".git/*" "src/*" "package.json" "postcss.config.js" \
+    -x ".git" ".git/*" "src/*" "package.json" "postcss.config.js" \
     ".gitignore" "deploy.sh" "plan.md" "README.md" "*.zip"
 
 echo "Done. Zip: vive-ai-${VERSION}.zip"
