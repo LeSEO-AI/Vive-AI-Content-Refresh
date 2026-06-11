@@ -8,7 +8,25 @@ DEST="/opt/lampp/htdocs/wp-content/plugins/vive-ai"
 SRC="$(dirname "$0")"
 
 # Extract version from plugin header
-VERSION=$(grep -oP "VIVE_VERSION', '\K[^']+" "$SRC/vive-ai.php")
+VERSION=$(grep -oP "Version: \K[0-9.]+" "$SRC/vive-ai.php")
+PLUGIN_TESTED=$(grep -oP "Tested up to: \K[0-9.]+" "$SRC/vive-ai.php")
+README_STABLE=$(grep -oP "Stable tag: \K[0-9.]+" "$SRC/readme.txt")
+README_TESTED=$(grep -oP "Tested up to: \K[0-9.]+" "$SRC/readme.txt")
+
+# 🚨 Validation: single source of truth from plugin header
+echo "Validating..."
+
+if [ "$README_STABLE" != "$VERSION" ]; then
+  echo "❌ readme.txt Stable tag ($README_STABLE) != plugin Version ($VERSION)"
+  exit 1
+fi
+
+if [ "$README_TESTED" != "$PLUGIN_TESTED" ]; then
+  echo "❌ readme.txt Tested up to ($README_TESTED) != plugin Tested up to ($PLUGIN_TESTED)"
+  exit 1
+fi
+
+echo "✅ readme.txt matches plugin header"
 
 echo "Syncing files..."
 rsync -av --delete \

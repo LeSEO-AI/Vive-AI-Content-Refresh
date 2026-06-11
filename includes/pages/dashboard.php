@@ -186,7 +186,7 @@ function vive_dashboard_page() {
 						<tr>
 							<td class="fw-medium"><?php echo esc_html( $post->post_title ); ?></td>
 							<td><span class="badge <?php echo esc_attr( $badge_class ); ?>" title="Published <?php echo esc_attr( $months ); ?> months ago"><?php echo esc_html( $label ); ?></span></td>
-							<td class="text-body-secondary small"><?php echo get_the_date( 'M j, Y', $post ); ?></td>
+							<td class="text-body-secondary small"><?php echo esc_html( get_the_date( 'M j, Y', $post ) ); ?></td>
 							<td class="text-end">
 								<a href="<?php echo esc_url( add_query_arg( array( 'page' => 'vive-ai-revive', 'post_id' => $post->ID ), admin_url( 'admin.php' ) ) ); ?>" class="btn btn-outline-secondary btn-sm">Revive</a>
 							</td>

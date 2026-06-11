@@ -46,7 +46,7 @@ function vive_settings_page() {
 		update_option( 'vive_persona', $persona );
 		update_option( 'vive_rules', $rules );
 		update_option( 'vive_language', $language );
-		$message = 'Persona &amp; rules saved.';
+		$message = 'Persona & rules saved.';
 	}
 
 	$api_key  = get_option( 'vive_api_key', '' );

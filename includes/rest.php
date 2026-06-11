@@ -96,7 +96,7 @@ add_action( 'rest_api_init', function() {
 		'permission_callback' => function( $request ) {
 			$post_id = intval( $request->get_param( 'post_id' ) );
 			if ( $post_id > 0 ) {
-				return current_user_can( 'edit_post', $post_id ) && current_user_can( 'publish_post', $post_id );
+				return current_user_can( 'edit_post', $post_id ) && current_user_can( 'publish_posts' );
 			}
 			return current_user_can( 'edit_posts' ) && current_user_can( 'publish_posts' );
 		},
