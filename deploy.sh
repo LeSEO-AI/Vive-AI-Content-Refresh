@@ -1,7 +1,7 @@
 #!/bin/bash
 # Deploy to local LAMP dev server + build zip
 # Usage: ./deploy.sh
-
+## REMEMBER, BUMP VERSION IN PACKAGE.JSON, FOR LANDING PAGE IF YOU BUMP VERSION IN PLUGIN HEADER!!!!
 set -e
 
 DEST="/opt/lampp/htdocs/wp-content/plugins/vive-ai"

@@ -93,12 +93,25 @@ add_action( 'rest_api_init', function() {
 
 			return rest_ensure_response( array( 'success' => true, 'post_id' => $result ) );
 		},
-		'permission_callback' => function( $request ) {
+		'permission_callback' => function ( $request ) {
 			$post_id = intval( $request->get_param( 'post_id' ) );
+
 			if ( $post_id > 0 ) {
-				return current_user_can( 'edit_post', $post_id ) && current_user_can( 'publish_posts' );
+				$post = get_post( $post_id );
+				if ( ! $post ) {
+					return false;
+				}
+				$post_type_object = get_post_type_object( $post->post_type );
+				if ( ! $post_type_object ) {
+					return false;
+				}
+				return current_user_can( 'edit_post', $post_id )
+					&& current_user_can( $post_type_object->cap->publish_posts );
 			}
-			return current_user_can( 'edit_posts' ) && current_user_can( 'publish_posts' );
+
+			$post_type_object = get_post_type_object( 'post' );
+			return current_user_can( $post_type_object->cap->edit_posts )
+				&& current_user_can( $post_type_object->cap->publish_posts );
 		},
 	) );
 
@@ -122,12 +135,13 @@ add_action( 'rest_api_init', function() {
 
 			return rest_ensure_response( array( 'success' => true, 'post_id' => $result ) );
 		},
-		'permission_callback' => function( $request ) {
+		'permission_callback' => function ( $request ) {
 			$post_id = intval( $request->get_param( 'post_id' ) );
 			if ( $post_id > 0 ) {
 				return current_user_can( 'edit_post', $post_id );
 			}
-			return current_user_can( 'edit_posts' );
+			$post_type_object = get_post_type_object( 'post' );
+			return current_user_can( $post_type_object->cap->edit_posts );
 		},
 	) );
 

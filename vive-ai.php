@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Vive - AI Content Reviver
  * Description: AI-powered content reviver — keep old posts ranking with AI.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: dav1lex
  * Author URI: https://leseo.app
  * License: GPLv2 or later
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'VIVE_VERSION', '1.0.1' );
+define( 'VIVE_VERSION', '1.0.2' );
 define( 'VIVE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'VIVE_URL', plugin_dir_url( __FILE__ ) );
 define( 'VIVE_INCLUDES', VIVE_PATH . 'includes/' );

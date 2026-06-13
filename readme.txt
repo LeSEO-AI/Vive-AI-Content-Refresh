@@ -5,7 +5,7 @@ Tags: seo, content refresh, ai writing, blog posts, content update
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,9 @@ Content is sent to the Vive AI service for processing. It is not stored, shared,
 Yes. Go to Settings and define your persona and writing rules. You can also auto-discover these from your existing posts.
 
 == Changelog ==
+
+= 1.0.2 =
+* Fixed permission callbacks for /publish and /save-draft — derive publish/edit capability from post type object instead of hardcoded strings
 
 = 1.0.0 =
 * Initial public release
