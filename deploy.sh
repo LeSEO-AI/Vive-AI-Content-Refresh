@@ -13,7 +13,6 @@ PLUGIN_TESTED=$(grep -oP "Tested up to: \K[0-9.]+" "$SRC/vive-ai.php")
 README_STABLE=$(grep -oP "Stable tag: \K[0-9.]+" "$SRC/readme.txt")
 README_TESTED=$(grep -oP "Tested up to: \K[0-9.]+" "$SRC/readme.txt")
 
-# 🚨 Validation: single source of truth from plugin header
 echo "Validating..."
 
 if [ "$README_STABLE" != "$VERSION" ]; then
